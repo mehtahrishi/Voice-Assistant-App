@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔊 Voice Assistant</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>🔊 Nami Voice Assistant</header>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-area">
+            <button id="mic-btn" class="mic-btn">🎤</button>
+            <input type="text" id="user-input" placeholder="Say something...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+        const sendBtn = document.getElementById("send-btn");
+        const micBtn = document.getElementById("mic-btn");
+
+        let isListening = false;
+        let recognition;
+
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = "en-US";
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                userInput.value = transcript;
+                sendMessage();
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                micBtn.textContent = "🎤";
+            };
+        }
+
+        micBtn.addEventListener("click", () => {
+            if (!isListening && recognition) {
+                recognition.start();
+                isListening = true;
+                micBtn.textContent = "🛑";
+            } else if (recognition) {
+                recognition.stop();
+            }
+        });
+
+        sendBtn.addEventListener("click", sendMessage);
+
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+
+        function appendMessage(text, isUser) {
+            const msg = document.createElement("div");
+            msg.className = "message " + (isUser ? "user" : "bot");
+            msg.innerHTML = `<span class="avatar">${isUser ? "🧑" : "🤖"}</span><span>${text}</span>`;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, true);
+            userInput.value = "";
+
+            appendMessage("Processing...", false);
+
+            fetch("/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_input: text })
+            })
+            .then(res => res.json())
+            .then(data => {
+                chatBox.lastChild.remove(); // remove "Processing..."
+                appendMessage(data.response, false);
+                speak(data.response);
+            })
+            .catch(() => {
+                chatBox.lastChild.remove();
+                appendMessage("Error contacting the AI.", false);
+            });
+        }
+
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
