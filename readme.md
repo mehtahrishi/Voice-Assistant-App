@@ -3,32 +3,36 @@
 This is a modern voice assistant web application built using **Flask** for the backend and **HTML**, **CSS**, and **JavaScript** for the frontend. The app uses a rule-based approach with a fallback AI system for processing user input and providing responses. The UI features speech recognition and synthesis, providing a Siri-like experience.
 
 ## Features
-- **Voice Interaction**: The app allows users to speak to the assistant, using Web Speech API for speech-to-text and text-to-speech functionality.
-- **Rule-based Responses**: The assistant can respond to simple queries such as "Hello", "How are you?", "What time is it?", and "Bye".
-- **AI Fallback**: If the user query doesn't match any predefined rules, the assistant falls back to a free AI API (OpenRouter) for more complex responses.
-- **Smooth UI Animations**: The app includes smooth entrance animations, message fading, and hover effects to make the user experience more interactive.
+
+* **Voice Interaction**: The app allows users to speak to the assistant, using Web Speech API for speech-to-text and text-to-speech functionality.
+* **Rule-based Responses**: The assistant can respond to simple queries such as "Hello", "How are you?", "What time is it?", and "Bye".
+* **AI Fallback**: If the user query doesn't match any predefined rules, the assistant falls back to a free AI API (OpenRouter) for more complex responses.
+* **Smooth UI Animations**: The app includes smooth entrance animations, message fading, and hover effects to make the user experience more interactive.
 
 ## Technologies Used
-- **Backend**: Flask (Python)
-- **Frontend**: HTML, CSS, JavaScript
-- **Voice Recognition**: Web Speech API (Speech-to-Text & Text-to-Speech)
-- **AI API**: OpenRouter for AI-based responses
-- **Animations**: CSS animations for smooth transitions
+
+* **Backend**: Flask (Python)
+* **Frontend**: HTML, CSS, JavaScript
+* **Voice Recognition**: Web Speech API (Speech-to-Text & Text-to-Speech)
+* **AI API**: OpenRouter for AI-based responses
+* **Animations**: CSS animations for smooth transitions
 
 ## Requirements
 
 To run this app locally, you need the following:
-- Python 3.x
-- Flask
-- `requests` library for making API calls
+
+* Python 3.x
+* Flask
+* `requests` library for making API calls
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/mehtahrishi/voice-assistant-app.git
    cd voice-assistant-app
-````
+   ```
 
 2. Create a virtual environment (optional but recommended):
 
@@ -73,6 +77,7 @@ To run this app locally, you need the following:
   * "Hello" → "Hi! How can I help you?"
   * "Your name" → "I’m your voice assistant!"
   * "Time" → "The current time is \[time]"
+  * "Date" → "Today is \[date]"
   * "How are you?" → "I'm just code, but feeling quite functional!"
   * "Bye" → "Goodbye! Have a great day!"
 
@@ -82,7 +87,7 @@ To run this app locally, you need the following:
 
 * **`index.html`**: The main structure of the user interface.
 
-  * **Mic Button**: Starts and stops speech recognition when clicked. It toggles between a microphone icon (🎤) and a stop icon (🛑).
+  * **Mic Button**: Starts and stops speech recognition when clicked. It toggles between a microphone icon (🎤) and a stop icon (🚩).
   * **Message Box**: Displays the conversation with the assistant. User messages are aligned to the right, and bot messages are aligned to the left.
   * **Text Input**: Allows the user to type messages if preferred over speech input.
 
@@ -125,18 +130,6 @@ To run this app locally, you need the following:
 
 Feel free to fork this repository and create a pull request if you'd like to contribute improvements or bug fixes.
 
+## License
 
-```
-
-### Explanation:
-- **Project Description**: Introduces the app and provides context on its functionality and purpose.
-- **Technologies Used**: Lists the key technologies involved in the project.
-- **Installation Instructions**: Walks users through setting up and running the app locally, with dependencies and environment setup.
-- **Backend Explanation**: Describes how the Flask app works, including route handling and API integration.
-- **Frontend Explanation**: Explains the structure of the frontend, from HTML and CSS to JavaScript functions like speech recognition and synthesis.
-- **Usage**: Provides detailed usage instructions for interacting with the app.
-- **Contributing**: Encourages others to contribute and explains how to do so.
-- **License**: Includes a simple license statement (MIT) that allows others to freely use and modify the project.
-
-Let me know if you'd like any additional details or sections!
-```
+This project is open-source and available under the MIT License.
