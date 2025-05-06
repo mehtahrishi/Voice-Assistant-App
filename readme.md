@@ -1,4 +1,3 @@
-````markdown
 # Voice Assistant Web App
 
 This is a modern voice assistant web application built using **Flask** for the backend and **HTML**, **CSS**, and **JavaScript** for the frontend. The app uses a rule-based approach with a fallback AI system for processing user input and providing responses. The UI features speech recognition and synthesis, providing a Siri-like experience.
